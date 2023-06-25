@@ -11,8 +11,8 @@ date_format = "%Y%m%d"  # Format for the date in the URL
 destination_directory = "storage_1"  # Destination directory to save the files
 
 nft_storage_api_url = "https://api.nft.storage/upload"
-api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDczMzhiZWI2MjYxMEJBZDJCNERBMDVBNDQ3NTIwNjRiNDM4QThjRjIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY4NzY2NTgzMzA2MywibmFtZSI6ImJsb2NrY2hhaSJ9.FpvpeJbLLLN4WITbK1K-t3E48_QVkjJvSrArESlWxP0"  # Replace with your NFT.Storage API key
-
+#api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDczMzhiZWI2MjYxMEJBZDJCNERBMDVBNDQ3NTIwNjRiNDM4QThjRjIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY4NzY2NTgzMzA2MywibmFtZSI6ImJsb2NrY2hhaSJ9.FpvpeJbLLLN4WITbK1K-t3E48_QVkjJvSrArESlWxP0"  # Replace with your NFT.Storage API key
+api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGJhNWQzZTU2OTlDRTllZDYwMUZhRkUwYzhiZmI1MzJCYjRFYWI5OTgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2NTQyNTUzNDk0OCwibmFtZSI6InNkc2QifQ.3wabmCtAPSt4_6vNdD0NCLMeZIHvMthxfs9gETb5mq4"
 # Configure Tor proxy settings
 proxy_host = '127.0.0.1'
 proxy_port = 9050
@@ -118,7 +118,7 @@ def process_date_range(start_date, end_date):
             # Delete the local file
             delete_file(destination_path)
         except:
-            pass
+            print("failed")
 
         # Move to the next date
         current_date += timedelta(days=1)
