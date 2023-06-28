@@ -103,22 +103,22 @@ def process_date_range(start_date, end_date):
         date_str = current_date.strftime(date_format)
         url = f"https://gz.blockchair.com/bitcoin/transactions/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
         destination_path = os.path.join(destination_directory, f"blockchair_bitcoin_transactions_{date_str}.tsv.gz")
-        try:
+        #try:
         
-            # Download the file
-            download_file(url, destination_path)
+        # Download the file
+        download_file(url, destination_path)
 
-            # Upload the file and get the CID
-            cid = upload_file(destination_path)
+        # Upload the file and get the CID
+        cid = upload_file(destination_path)
 
-            if cid:
-                # Upload the CID to MongoDB
-                upload_cid_to_mongo(cid, date_str, os.path.basename(destination_path))
+        if cid:
+            # Upload the CID to MongoDB
+            upload_cid_to_mongo(cid, date_str, os.path.basename(destination_path))
 
-            # Delete the local file
-            delete_file(destination_path)
-        except:
-            print("failed")
+        # Delete the local file
+        delete_file(destination_path)
+        #except:
+         #   print("failed")
 
         # Move to the next date
         current_date += timedelta(days=1)
