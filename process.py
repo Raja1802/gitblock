@@ -11,6 +11,8 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 from bitcoin import privkey_to_address
 import bitcoin
+from threading import Thread
+
 import sqlite3
 def download_file(url, file_path):
     response = requests.get(url)
