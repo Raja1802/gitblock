@@ -128,7 +128,7 @@ def get_cid_by_date(date_str):
 
 app = Flask(__name__)
 
-async def process_data_async(date_str):
+def process_data_async(date_str):
     # Check if the database has a document for the current date
     cid_result = get_cid_by_date(date_str)
 
@@ -147,7 +147,7 @@ async def process_data_async(date_str):
 
             # Process the DataFrame in chunks
             chunk_iterator = tsv_to_dataframe(unzipped_path)
-            async for chunk in chunk_iterator:
+            for chunk in chunk_iterator:
                 # Perform operations on each chunk
                 private_keys = chunk['hash']
 
@@ -178,31 +178,28 @@ async def process_data_async(date_str):
     else:
         print(f"No document found for the date {date_str}.")
 
-async def process_data_range(start_date, end_date):
+def process_data_range(start_date, end_date):
     current_date = start_date
     while current_date <= end_date:
         date_str = current_date.strftime("%Y%m%d")
-        await process_data_async(date_str)
+        process_data_async(date_str)
         current_date += timedelta(days=1)
 
 @app.route('/process', methods=['POST'])
-def process_data():
-    data = request.get_json()
-    start_date_str = data.get('start_date')
-    end_date_str = data.get('end_date')
+def process_dates():
+    start_date_str = request.json['start_date']
+    end_date_str = request.json['end_date']
 
-    # Convert date strings to datetime objects
     start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
     end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
-    # Create an event loop
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
-    # Run the data processing asynchronously
-    loop.run_until_complete(process_data_range(start_date, end_date))
-    loop.close()
 
-    return jsonify({'message': 'Data processing completed.'})
+    # Start the data processing in a separate thread
+    thread = Thread(target=process_date_range, args=(start_date, end_date))
+    thread.start()
+
+    # Return a response to the client immediately
+    return jsonify({'status': 'Data processing started in the background.'})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6000)
