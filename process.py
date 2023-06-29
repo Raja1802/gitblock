@@ -196,7 +196,7 @@ def process_dates():
     end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
 
     # Start the data processing in a separate thread
-    thread = Thread(target=process_date_range, args=(start_date, end_date))
+    thread = Thread(target=process_data_range, args=(start_date, end_date))
     thread.start()
 
     # Return a response to the client immediately
