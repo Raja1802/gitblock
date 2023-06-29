@@ -139,7 +139,7 @@ def process_data_async(date_str):
 
         # Download the file from IPFS
         url = f"https://ipfs.thirdwebcdn.com/ipfs/{cid_result}/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
-        file_path = f"/data/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
+        file_path = f"data/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
         if download_file(url, file_path):
             print(f"File downloaded for date {date_str}")
 
