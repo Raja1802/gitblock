@@ -138,7 +138,8 @@ def process_data_async(date_str):
         print(f"CID for date {date_str}: {cid_result}")
 
         # Download the file from IPFS
-        url = f"https://ipfs.thirdwebcdn.com/ipfs/{cid_result}/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
+        # https://bafybeih6wfu7o3w6yyapwu7cfcsczvb432iahw2f3o24jmv7s3fs2n3fda.ipfs.nftstorage.link/ipfs/bafybeih6wfu7o3w6yyapwu7cfcsczvb432iahw2f3o24jmv7s3fs2n3fda/blockchair_bitcoin_transactions_20150101.tsv.gz
+        url = f"https://{cid_result}.ipfs.nftstorage.link/ipfs/{cid_result}/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
         file_path = f"data/blockchair_bitcoin_transactions_{date_str}.tsv.gz"
         if download_file(url, file_path):
             print(f"File downloaded for date {date_str}")
