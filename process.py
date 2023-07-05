@@ -185,7 +185,10 @@ def process_data_range(start_date, end_date):
     current_date = start_date
     while current_date <= end_date:
         date_str = current_date.strftime("%Y%m%d")
-        process_data_async(date_str)
+        try:
+            process_data_async(date_str)
+        except:
+            print(f"failed on {date_str}")
         current_date += timedelta(days=1)
 
 @app.route('/process', methods=['POST'])
