@@ -30,11 +30,11 @@ def unzip_file(file_path):
             shutil.copyfileobj(gz_file, unzipped_file)
     return unzipped_path
 
-def tsv_to_dataframe(file_path, chunk_size=1000):
+def tsv_to_dataframe(file_path, chunk_size=10000):
     chunks = pd.read_csv(file_path, delimiter='\t', chunksize=chunk_size)
     return chunks
 
-def check_keys_in_db(public_keys, db_file, chunk_size=1000):
+def check_keys_in_db(public_keys, db_file, chunk_size=10000):
     # Connect to the SQLite database
     conn = sqlite3.connect(db_file)
 
